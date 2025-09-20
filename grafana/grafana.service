@@ -1,0 +1,27 @@
+this is for secrets:
+# /etc/default/grafana (root:root 600)
+  GF_SECURITY_ADMIN_PASSWORD=your_secure_password
+  GF_DATABASE_PASSWORD=db_password
+
+
+
+service to run:
+# /etc/systemd/system/grafana.service
+[Unit]
+Description=Grafana Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker stop grafana
+ExecStartPre=-/usr/bin/docker rm grafana
+ExecStart=/usr/bin/docker run --name grafana \
+    -p 3000:3000 \
+    --env-file /etc/default/grafana \
+    -v /opt/grafana/data:/var/lib/grafana \
+    grafana/grafana:latest
+ExecStop=/usr/bin/docker stop grafana
+
+[Install]
+WantedBy=multi-user.target
