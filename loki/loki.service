@@ -6,6 +6,7 @@ Requires=docker.service
 
 [Service]
 Restart=always
+User=loki-admin
 ExecStartPre=-/usr/bin/docker stop loki
 ExecStartPre=-/usr/bin/docker rm loki
 ExecStart=/usr/bin/docker run --name loki \

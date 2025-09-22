@@ -42,3 +42,11 @@ sudo systemctl start grafana.service
 sudo systemctl status grafana.service
 
 ## Loki Logging Service
+1. Create a loki user account on the server(same rationale as grafana)
+- sudo useradd -r -s /bin/false loki-admin
+- sudo usermod -aG docker loki-admin
+2. Create required volume directories
+- sudo mkdir -p /opt/loki/config /opt/loki/data
+- sudo chown -R loki-admin:loki-admin /opt/loki
+3. Create the loki configuration file
+4. Folllow same instructions as grafana for starting systemd service
