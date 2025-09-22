@@ -14,6 +14,7 @@ Requires=docker.service
 
 [Service]
 Restart=always
+User=grafana-admin
 ExecStartPre=-/usr/bin/docker stop grafana
 ExecStartPre=-/usr/bin/docker rm grafana
 ExecStart=/usr/bin/docker run --name grafana \
