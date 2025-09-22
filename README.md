@@ -26,19 +26,19 @@ What this does is create a system user (-r) with -s /bin/false no shell, meaning
     -v /opt/grafana/data:/var/lib/grafana \
     grafana/grafana:latest
 7. Setup and run like a systemd service. File example in grafana/grafana.service
-1. Create the service file:
+- Create the service file:
 sudo nano /etc/systemd/system/grafana.service
 
-2. Reload systemd to recognize the new service:
+- Reload systemd to recognize the new service:
 sudo systemctl daemon-reload
 
-3. Enable the service to start on boot:
+- Enable the service to start on boot:
 sudo systemctl enable grafana.service
 
-4. Start the service immediately:
+- Start the service immediately:
 sudo systemctl start grafana.service
 
-5. Check status:
+- Check status:
 sudo systemctl status grafana.service
 
 ## Loki Logging Service
