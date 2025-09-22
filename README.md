@@ -12,7 +12,10 @@ Instructions:
 1. Make sure docker is installed on the server: ubuntu docs(https://docs.docker.com/engine/install/ubuntu/)
 2. After installing docker, lets begin setting up the admin credentials for grafana. Because we're a 1 man op and don't really need a more intricate setup than what we demand, we will set the credentials in /etc/default/grafana 600 permissions and pull them with grafana at container start time
 3. Create grafana credential file with env: GF_SECURITY_ADMIN_PASSWORD=your_secure_password
-4. We are running on hetzner and hetzner often has outages and we dont want to have to restart the docker container everytime the server undergoes maintenance. So we are going to use systemd to automatically handle this. However if you dont feel like using systemd, here is the plain docker run command: 
+4. Create volume path on host for retention with restarts. Creates volume for host in /opt/grafana/data with user id 472 owning permissions on the dir (user id of grafana container)
+- sudo mkdir -p /opt/grafana/data
+- sudo chown 472:472 /opt/grafana/data 
+5. We are running on hetzner and hetzner often has outages and we dont want to have to restart the docker container everytime the server undergoes maintenance. So we are going to use systemd to automatically handle this. However if you dont feel like using systemd, here is the plain docker run command: 
     /usr/bin/docker run --name grafana \
     -p 3000:3000 \
     --env-file /etc/default/grafana \
