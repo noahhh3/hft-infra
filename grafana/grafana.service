@@ -19,6 +19,7 @@ ExecStartPre=-/usr/bin/docker stop grafana
 ExecStartPre=-/usr/bin/docker rm grafana
 ExecStart=/usr/bin/docker run --name grafana \
     -p 3000:3000 \
+    --network monitoring \
     --env-file /etc/default/grafana \
     -v /opt/grafana/data:/var/lib/grafana \
     grafana/grafana:latest
